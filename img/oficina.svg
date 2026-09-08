@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img"
+     aria-label="Ilustracao de uma turma da oficina de informatica">
+  <title>Turma da oficina Internet Segura</title>
+
+  <!-- parede e piso -->
+  <rect width="800" height="520" fill="#eef4f7"/>
+  <rect y="360" width="800" height="160" fill="#dbe6ec"/>
+  <line x1="0" y1="360" x2="800" y2="360" stroke="#b6c0c9" stroke-width="3"/>
+
+  <!-- quadro branco com o desenho de uma janela de navegador -->
+  <rect x="60" y="50" width="330" height="220" rx="8" fill="#ffffff" stroke="#072f41" stroke-width="5"/>
+  <rect x="90" y="82" width="270" height="160" rx="6" fill="#eef4f7" stroke="#0b4f6c" stroke-width="4"/>
+  <rect x="90" y="82" width="270" height="30" rx="6" fill="#0b4f6c"/>
+  <circle cx="106" cy="97" r="5" fill="#ffd166"/>
+  <circle cx="122" cy="97" r="5" fill="#ffffff"/>
+  <circle cx="138" cy="97" r="5" fill="#ffffff"/>
+  <!-- cadeado, simbolo de site seguro -->
+  <rect x="205" y="150" width="46" height="38" rx="6" fill="#0b4f6c"/>
+  <path d="M215 150 v-12 a13 13 0 0 1 26 0 v12" fill="none" stroke="#0b4f6c" stroke-width="6"/>
+  <line x1="120" y1="212" x2="330" y2="212" stroke="#b6c0c9" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- instrutora em pe, apontando para o quadro -->
+  <g>
+    <circle cx="470" cy="120" r="30" fill="#9c3412"/>
+    <path d="M440 118 q30-34 60 0 q-8-30-30-30 t-30 30z" fill="#4a2110"/>
+    <path d="M470 152 q-42 8-42 60 v88 h84 v-88 q0-52-42-60z" fill="#0b4f6c"/>
+    <!-- braco apontando para o quadro -->
+    <line x1="440" y1="180" x2="380" y2="150" stroke="#9c3412" stroke-width="14" stroke-linecap="round"/>
+    <line x1="470" y1="300" x2="452" y2="360" stroke="#072f41" stroke-width="16" stroke-linecap="round"/>
+    <line x1="490" y1="300" x2="500" y2="360" stroke="#072f41" stroke-width="16" stroke-linecap="round"/>
+  </g>
+
+  <!-- quatro alunos em bancadas com computadores -->
+  <g>
+    <!-- aluno 1 -->
+    <circle cx="120" cy="330" r="24" fill="#c98a5b"/>
+    <path d="M120 356 q-34 6-34 46 h68 q0-40-34-46z" fill="#9c3412"/>
+    <rect x="70" y="420" width="110" height="14" rx="4" fill="#072f41"/>
+    <rect x="88" y="372" width="70" height="46" rx="4" fill="#ffffff" stroke="#072f41" stroke-width="4"/>
+
+    <!-- aluno 2 -->
+    <circle cx="270" cy="330" r="24" fill="#f0c8a0"/>
+    <path d="M270 356 q-34 6-34 46 h68 q0-40-34-46z" fill="#0b4f6c"/>
+    <rect x="220" y="420" width="110" height="14" rx="4" fill="#072f41"/>
+    <rect x="238" y="372" width="70" height="46" rx="4" fill="#ffffff" stroke="#072f41" stroke-width="4"/>
+
+    <!-- aluno 3 (cadeira de rodas) -->
+    <circle cx="560" cy="330" r="24" fill="#8a5a3b"/>
+    <path d="M560 356 q-34 6-34 46 h68 q0-40-34-46z" fill="#0b4f6c"/>
+    <circle cx="545" cy="452" r="26" fill="none" stroke="#072f41" stroke-width="6"/>
+    <circle cx="545" cy="452" r="5" fill="#072f41"/>
+    <rect x="510" y="420" width="110" height="14" rx="4" fill="#072f41"/>
+    <rect x="528" y="372" width="70" height="46" rx="4" fill="#ffffff" stroke="#072f41" stroke-width="4"/>
+
+    <!-- aluno 4 (pessoa idosa, cabelo grisalho) -->
+    <circle cx="700" cy="330" r="24" fill="#e0b48c"/>
+    <path d="M676 322 q24-26 48 0 q-6-24-24-24 t-24 24z" fill="#d5dde2"/>
+    <path d="M700 356 q-34 6-34 46 h68 q0-40-34-46z" fill="#9c3412"/>
+    <rect x="650" y="420" width="110" height="14" rx="4" fill="#072f41"/>
+    <rect x="668" y="372" width="70" height="46" rx="4" fill="#ffffff" stroke="#072f41" stroke-width="4"/>
+  </g>
+</svg>

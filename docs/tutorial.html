@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tutorial — Acessibilidade Web e HTML Semântico | Conecta Bairro</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 16mm; }
+
+  :root {
+    --tinta: #14181f;
+    --suave: #454d59;
+    --marca: #0b4f6c;
+    --escura: #072f41;
+    --destaque: #9c3412;
+    --clara: #e6f0f4;
+    --alt: #f3f6f8;
+    --borda: #b6c0c9;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    font-size: 10.7pt;
+    line-height: 1.55;
+    color: var(--tinta);
+    margin: 0;
+  }
+
+  h1, h2, h3, h4 { color: var(--escura); line-height: 1.25; }
+  h1 { font-size: 26pt; margin: 0 0 6pt; }
+  h2 {
+    font-size: 15pt;
+    margin: 22pt 0 8pt;
+    padding-bottom: 4pt;
+    border-bottom: 2px solid var(--marca);
+    break-after: avoid;
+  }
+  h3 { font-size: 12pt; margin: 14pt 0 5pt; break-after: avoid; }
+  h4 { font-size: 10.7pt; margin: 10pt 0 4pt; color: var(--marca); break-after: avoid; }
+  p { margin: 0 0 7pt; text-align: justify; }
+  ul, ol { margin: 0 0 8pt; padding-left: 16pt; }
+  li { margin-bottom: 3pt; }
+
+  /* ---------- capa ---------- */
+  .capa {
+    height: 245mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    break-after: page;
+  }
+  .capa .selo {
+    font-size: 11pt;
+    letter-spacing: 2pt;
+    text-transform: uppercase;
+    color: var(--destaque);
+    font-weight: 700;
+    margin-bottom: 10pt;
+  }
+  .capa h1 { font-size: 30pt; }
+  .capa .sub { font-size: 14pt; color: var(--suave); margin-bottom: 26pt; }
+  .capa img { width: 62mm; margin: 0 auto 24pt; }
+  .capa .ficha {
+    display: inline-block;
+    text-align: left;
+    background: var(--alt);
+    border: 1px solid var(--borda);
+    border-left: 5px solid var(--marca);
+    padding: 12pt 18pt;
+    font-size: 10.5pt;
+  }
+  .capa .ficha p { margin: 0 0 4pt; text-align: left; }
+
+  /* ---------- sumario ---------- */
+  .sumario { background: var(--alt); border: 1px solid var(--borda); padding: 10pt 16pt; }
+  .sumario ol { margin: 0; }
+
+  /* ---------- codigo ---------- */
+  pre {
+    background: #f7f9fa;
+    border: 1px solid var(--borda);
+    border-left: 5px solid var(--marca);
+    border-radius: 4px;
+    padding: 8pt 10pt;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 8.6pt;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin: 6pt 0 8pt;
+    break-inside: avoid;
+  }
+  pre .c { color: #4d7a2f; }   /* comentario */
+  code {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 9.3pt;
+    background: var(--clara);
+    padding: 0 3px;
+    border-radius: 3px;
+  }
+
+  /* ---------- blocos de analise ---------- */
+  .analise {
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+    padding: 8pt 12pt;
+    margin: 0 0 12pt;
+    background: #fff;
+    break-inside: avoid;
+  }
+  .analise dl { margin: 0; }
+  .analise dt {
+    font-weight: 700;
+    color: var(--marca);
+    float: left;
+    clear: left;
+    width: 92pt;
+  }
+  .analise dd { margin: 0 0 4pt 96pt; }
+
+  .destaque-box {
+    background: var(--clara);
+    border-left: 5px solid var(--marca);
+    padding: 8pt 12pt;
+    margin: 8pt 0 12pt;
+    break-inside: avoid;
+  }
+  .destaque-box p:last-child { margin-bottom: 0; }
+
+  /* ---------- tabelas ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.3pt;
+    margin: 6pt 0 12pt;
+    break-inside: avoid;
+  }
+  th, td { border: 1px solid var(--borda); padding: 4pt 6pt; text-align: left; vertical-align: top; }
+  th { background: var(--escura); color: #fff; }
+  tbody tr:nth-child(even) { background: var(--alt); }
+  td.ok { color: #1c5c1c; font-weight: 700; }
+
+  /* ---------- figuras ---------- */
+  figure {
+    margin: 10pt 0 14pt;
+    break-inside: avoid;
+    text-align: center;
+  }
+  figure img {
+    max-width: 100%;
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+  }
+  figure img.estreita { max-width: 78%; }
+  figure img.mobile { max-width: 46%; }
+  figcaption {
+    font-size: 9pt;
+    color: var(--suave);
+    margin-top: 4pt;
+    text-align: center;
+  }
+
+  .quebra { break-before: page; }
+  .link-repo {
+    font-family: Consolas, monospace;
+    font-size: 12pt;
+    color: var(--marca);
+    word-break: break-all;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== CAPA ===================== -->
+<div class="capa">
+  <div class="selo">Atividade Prática</div>
+  <h1>Acessibilidade Web e HTML Semântico</h1>
+  <p class="sub">Tutorial de desenvolvimento do site <strong>Conecta Bairro</strong></p>
+  <img src="../img/logo.svg" alt="Logotipo do projeto Conecta Bairro">
+  <div class="ficha">
+    <p><strong>Tema escolhido:</strong> projeto social de inclusão digital</p>
+    <p><strong>Tecnologias:</strong> HTML5 e CSS3 (sem frameworks)</p>
+    <p><strong>Referência de acessibilidade:</strong> WCAG 2.2 (níveis A e AA) e eMAG</p>
+    <p><strong>Arquivos entregues:</strong> index.html, css/estilo.css, img/ e docs/</p>
+  </div>
+</div>
+
+<!-- ===================== SUMARIO ===================== -->
+<h2>Sumário</h2>
+<div class="sumario">
+  <ol>
+    <li>Apresentação do projeto</li>
+    <li>Organização dos arquivos</li>
+    <li>Estrutura do HTML</li>
+    <li>Explicação das tags semânticas utilizadas</li>
+    <li>Desenvolvimento do CSS</li>
+    <li>Implementação dos recursos de acessibilidade</li>
+    <li>Construção do formulário</li>
+    <li>Testes de acessibilidade realizados</li>
+    <li>Capturas de tela da página</li>
+    <li>Conclusão: dificuldades e aprendizados</li>
+    <li>Repositório no GitHub</li>
+  </ol>
+</div>
+
+<!-- ===================== 1 ===================== -->
+<h2>1. Apresentação do projeto</h2>
+
+<p>
+  O tema escolhido foi um <strong>projeto social</strong>: o <strong>Conecta Bairro</strong>, uma
+  organização fictícia que oferece oficinas gratuitas de informática para jovens em busca do
+  primeiro emprego e para pessoas idosas que querem usar a internet com autonomia.
+</p>
+
+<p>
+  A escolha não foi por acaso. Um site sobre inclusão digital que fosse inacessível seria uma
+  contradição: parte do público real de um projeto assim é justamente formada por pessoas idosas,
+  com baixa visão, com pouca familiaridade com o mouse ou que dependem de leitor de tela. Isso deu
+  um critério prático para cada decisão tomada ao longo do desenvolvimento: <em>uma pessoa que
+  enxerga pouco, ou que navega só com o teclado, conseguiria se inscrever em uma oficina sozinha?</em>
+</p>
+
+<p>A página entregue possui:</p>
+<ul>
+  <li>cabeçalho (<code>&lt;header&gt;</code>) com logotipo, título e slogan;</li>
+  <li>menu de navegação (<code>&lt;nav&gt;</code>) com quatro links internos;</li>
+  <li>conteúdo principal (<code>&lt;main&gt;</code>) com <strong>quatro seções</strong>
+      (<code>&lt;section&gt;</code>): sobre o projeto, oficinas, depoimentos e inscrição;</li>
+  <li>imagem ilustrativa com texto alternativo, dentro de <code>&lt;figure&gt;</code>
+      e <code>&lt;figcaption&gt;</code>;</li>
+  <li>listas de informações (<code>&lt;ul&gt;</code> / <code>&lt;li&gt;</code>);</li>
+  <li>formulário acessível com <code>&lt;fieldset&gt;</code>, <code>&lt;legend&gt;</code>
+      e <code>&lt;label&gt;</code> associados;</li>
+  <li>links e botões com texto descritivo;</li>
+  <li>rodapé (<code>&lt;footer&gt;</code>) com contato, horários e links úteis.</li>
+</ul>
+
+<!-- ===================== 2 ===================== -->
+<h2>2. Organização dos arquivos</h2>
+
+<p>
+  Os arquivos foram separados por tipo. Essa divisão mantém o HTML responsável apenas pela
+  <strong>estrutura e pelo significado</strong> do conteúdo, e deixa a <strong>apresentação
+  visual</strong> inteiramente no CSS — que é exatamente o princípio por trás do HTML semântico.
+</p>
+
+<pre>pagina-inclusiva/
+│
+├── index.html              <span class="c">&lt;!-- página principal (estrutura e conteúdo) --&gt;</span>
+│
+├── css/
+│   └── estilo.css          <span class="c">/* toda a apresentação visual */</span>
+│
+├── img/
+│   ├── logo.svg            <span class="c">&lt;!-- logotipo do projeto --&gt;</span>
+│   ├── favicon.svg         <span class="c">&lt;!-- ícone da aba do navegador --&gt;</span>
+│   └── oficina.svg         <span class="c">&lt;!-- ilustração da turma da oficina --&gt;</span>
+│
+├── docs/
+│   ├── tutorial.html       <span class="c">&lt;!-- fonte deste documento --&gt;</span>
+│   ├── tutorial-acessibilidade.pdf
+│   └── captura-*.png       <span class="c">&lt;!-- capturas de tela do capítulo 9 --&gt;</span>
+│
+└── README.md               <span class="c">&lt;!-- descrição do repositório --&gt;</span></pre>
+
+<p>
+  As imagens estão em formato <strong>SVG</strong>. Como o SVG é vetorial, ele não perde nitidez
+  quando a pessoa aumenta o zoom do navegador para 200% ou 400% — recurso muito usado por quem tem
+  baixa visão (critério WCAG 1.4.4 – Redimensionar texto).
+</p>
+
+<!-- ===================== 3 ===================== -->
+<h2>3. Estrutura do HTML</h2>
+
+<h3>3.1 O esqueleto do documento</h3>
+
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html <strong>lang="pt-BR"</strong>&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta name="description" content="Conecta Bairro é um projeto social gratuito..."&gt;
+  &lt;title&gt;Conecta Bairro | Projeto de Inclusão Digital&lt;/title&gt;
+  &lt;link rel="icon" href="img/favicon.svg" type="image/svg+xml"&gt;
+  &lt;link rel="stylesheet" href="css/estilo.css"&gt;
+&lt;/head&gt;</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tag / atributo</dt>
+    <dd><code>&lt;html lang="pt-BR"&gt;</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Declarar que o idioma do conteúdo é o português do Brasil.</dd>
+    <dt>Por que foi escolhida</dt>
+    <dd>É o primeiro atributo que o navegador e a tecnologia assistiva leem para decidir como tratar o texto.</dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      O leitor de tela usa o <code>lang</code> para escolher a voz e a pronúncia. Sem ele — ou com
+      <code>lang="en"</code> — o texto seria lido com sotaque e entonação errados, muitas vezes de forma
+      incompreensível. Atende ao critério <strong>WCAG 3.1.1 – Idioma da página</strong>.
+    </dd>
+  </dl>
+</div>
+
+<div class="analise">
+  <dl>
+    <dt>Tag</dt>
+    <dd><code>&lt;title&gt;</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Nomear a página na aba do navegador, nos favoritos e nos resultados de busca.</dd>
+    <dt>Por que foi escolhida</dt>
+    <dd>É obrigatória em HTML5 e é o primeiro texto anunciado ao abrir a página.</dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      Quem usa leitor de tela e mantém várias abas abertas se orienta pelo título. Por isso ele é
+      específico (“Conecta Bairro | Projeto de Inclusão Digital”) e não genérico como “Página inicial”.
+      Critério <strong>WCAG 2.4.2 – Página intitulada</strong>.
+    </dd>
+  </dl>
+</div>
+
+<h3>3.2 As regiões (landmarks) da página</h3>
+
+<p>
+  O corpo da página foi dividido em regiões nomeadas. Leitores de tela oferecem um atalho para
+  “saltar entre regiões”, e é por isso que o uso de <code>&lt;div&gt;</code> genéricas foi evitado
+  no nível mais alto da estrutura: uma <code>&lt;div&gt;</code> não gera região alguma.
+</p>
+
+<pre>&lt;body&gt;
+  &lt;a class="link-salto" href="#conteudo"&gt;Pular para o conteúdo principal&lt;/a&gt;
+
+  &lt;header&gt;  ...logotipo, h1 e &lt;nav&gt; com o menu...  &lt;/header&gt;
+
+  &lt;main id="conteudo"&gt;
+    &lt;section id="sobre"&gt;       ...&lt;/section&gt;
+    &lt;section id="oficinas"&gt;    ...&lt;/section&gt;
+    &lt;section id="depoimentos"&gt; ...&lt;/section&gt;
+    &lt;section id="inscricao"&gt;   ...&lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;  ...contato, horários e links úteis...  &lt;/footer&gt;
+&lt;/body&gt;</pre>
+
+<h3>3.3 Hierarquia dos títulos</h3>
+
+<p>
+  Os títulos foram usados como um índice do documento, sem pular níveis. Um leitor de tela consegue
+  listar todos os títulos da página e navegar direto para um deles — mas isso só funciona se a
+  hierarquia estiver correta. A tabela abaixo mostra a hierarquia real da página entregue:
+</p>
+
+<table>
+  <thead>
+    <tr><th style="width:14%">Nível</th><th>Texto do título</th><th style="width:26%">Função</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>h1</code></td><td>Conecta Bairro</td><td>Título único da página</td></tr>
+    <tr><td><code>h2</code></td><td>Sobre o projeto</td><td>Seção 1</td></tr>
+    <tr><td><code>h3</code></td><td>Nossos números em 2025</td><td>Subtítulo da seção 1</td></tr>
+    <tr><td><code>h2</code></td><td>Oficinas oferecidas</td><td>Seção 2</td></tr>
+    <tr><td><code>h3</code></td><td>Informática básica / Internet segura / Currículo e trabalho digital</td><td>Título de cada <code>article</code></td></tr>
+    <tr><td><code>h2</code></td><td>Depoimentos dos alunos</td><td>Seção 3</td></tr>
+    <tr><td><code>h3</code></td><td>Quer ser voluntário?</td><td>Título do <code>aside</code></td></tr>
+    <tr><td><code>h2</code></td><td>Formulário de inscrição</td><td>Seção 4</td></tr>
+    <tr><td><code>h2</code></td><td>Contato / Horário de atendimento / Links úteis</td><td>Blocos do rodapé</td></tr>
+  </tbody>
+</table>
+
+<div class="destaque-box">
+  <p>
+    <strong>Cuidado importante:</strong> os títulos foram escolhidos pelo <em>nível hierárquico</em>,
+    nunca pelo tamanho da letra. Se um título precisasse ficar menor, o ajuste seria feito no CSS
+    (<code>font-size</code>) e não trocando <code>&lt;h2&gt;</code> por <code>&lt;h4&gt;</code>.
+    Trocar a tag quebraria a estrutura para quem não enxerga a página. Critério
+    <strong>WCAG 1.3.1 – Informações e relações</strong>.
+  </p>
+</div>
+
+<!-- ===================== 4 ===================== -->
+<h2 class="quebra">4. Explicação das tags semânticas utilizadas</h2>
+
+<p>
+  “HTML semântico” significa escolher a tag pelo <strong>significado do conteúdo</strong>, e não pelo
+  efeito visual que ela produz. Visualmente, quase tudo nesta página poderia ter sido feito com
+  <code>&lt;div&gt;</code> e <code>&lt;span&gt;</code>: o resultado na tela seria idêntico. A diferença
+  aparece para quem não vê a tela — a tag semântica é a única informação que o leitor de tela tem
+  sobre o papel de cada bloco.
+</p>
+
+<table>
+  <thead>
+    <tr><th style="width:20%">Tag</th><th style="width:38%">Para que serve</th><th>O que ela entrega à tecnologia assistiva</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>&lt;header&gt;</code></td><td>Cabeçalho da página</td><td>Região “banner”, alcançável por atalho</td></tr>
+    <tr><td><code>&lt;nav&gt;</code></td><td>Bloco de navegação</td><td>Região “navegação”; permite pular o menu inteiro</td></tr>
+    <tr><td><code>&lt;main&gt;</code></td><td>Conteúdo principal</td><td>Região “principal”, única na página; destino do link de salto</td></tr>
+    <tr><td><code>&lt;section&gt;</code></td><td>Bloco temático com título</td><td>Região nomeada pelo título associado</td></tr>
+    <tr><td><code>&lt;article&gt;</code></td><td>Conteúdo independente</td><td>Indica que o bloco faz sentido isolado do resto</td></tr>
+    <tr><td><code>&lt;aside&gt;</code></td><td>Conteúdo complementar</td><td>Região “complementar”; sinaliza que não é o assunto principal</td></tr>
+    <tr><td><code>&lt;figure&gt;</code> / <code>&lt;figcaption&gt;</code></td><td>Imagem com legenda</td><td>Liga a legenda visível à imagem de forma programática</td></tr>
+    <tr><td><code>&lt;form&gt;</code></td><td>Formulário</td><td>Região “formulário”</td></tr>
+    <tr><td><code>&lt;fieldset&gt;</code> / <code>&lt;legend&gt;</code></td><td>Grupo de campos</td><td>O grupo é anunciado junto de cada campo dentro dele</td></tr>
+    <tr><td><code>&lt;label&gt;</code></td><td>Rótulo de campo</td><td>Dá nome ao campo e aumenta a área de clique</td></tr>
+    <tr><td><code>&lt;button&gt;</code></td><td>Ação</td><td>Focável e acionável por Enter e Espaço, sem JavaScript</td></tr>
+    <tr><td><code>&lt;footer&gt;</code></td><td>Rodapé</td><td>Região “rodapé”</td></tr>
+  </tbody>
+</table>
+
+<h3>4.1 <code>&lt;header&gt;</code> e <code>&lt;nav&gt;</code> — cabeçalho e menu</h3>
+
+<pre>&lt;header class="cabecalho"&gt;
+  &lt;div class="cabecalho__marca"&gt;
+    &lt;img src="img/logo.svg" alt="Logotipo do Conecta Bairro: duas pessoas lado a lado
+         sob um sinal de conexão sem fio." width="56" height="56"&gt;
+    &lt;div&gt;
+      &lt;h1&gt;Conecta Bairro&lt;/h1&gt;
+      &lt;p class="cabecalho__slogan"&gt;Inclusão digital gratuita para a nossa comunidade&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;nav class="menu" <strong>aria-label="Menu principal"</strong>&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#sobre"&gt;Sobre o projeto&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#oficinas"&gt;Oficinas oferecidas&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#depoimentos"&gt;Depoimentos dos alunos&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#inscricao"&gt;Formulário de inscrição&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tag</dt>
+    <dd><code>&lt;nav&gt;</code> com uma <code>&lt;ul&gt;</code> por dentro</dd>
+    <dt>Finalidade</dt>
+    <dd>Marcar o conjunto de links de navegação do site.</dd>
+    <dt>Por que foi escolhida</dt>
+    <dd>
+      O menu é uma <em>lista</em> de destinos equivalentes; a <code>&lt;ul&gt;</code> expressa isso.
+      O <code>aria-label</code> nomeia a região, o que passa a ser necessário quando existe mais de
+      um bloco de navegação na página.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      O leitor de tela anuncia “navegação Menu principal, lista com 4 itens”. A pessoa já sabe
+      <strong>quantos</strong> links existem antes de percorrê-los e pode pular o bloco inteiro com um
+      único comando. Com <code>&lt;div&gt;</code>, nada disso seria anunciado.
+    </dd>
+  </dl>
+</div>
+
+<h3>4.2 <code>&lt;main&gt;</code> e <code>&lt;section&gt;</code> — conteúdo e seções</h3>
+
+<pre>&lt;main id="conteudo" class="conteudo"&gt;
+
+  &lt;section id="sobre" <strong>aria-labelledby="titulo-sobre"</strong>&gt;
+    &lt;h2 <strong>id="titulo-sobre"</strong>&gt;Sobre o projeto&lt;/h2&gt;
+    ...
+  &lt;/section&gt;</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tag</dt>
+    <dd><code>&lt;section&gt;</code> + <code>aria-labelledby</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Agrupar um trecho temático da página e dar um nome a esse trecho.</dd>
+    <dt>Por que foi escolhida</dt>
+    <dd>
+      Cada bloco trata de um assunto próprio e tem um título. Uma <code>&lt;section&gt;</code>
+      <em>sem</em> nome acessível é ignorada como região; por isso o <code>aria-labelledby</code>
+      aponta para o <code>id</code> do próprio <code>&lt;h2&gt;</code>, reaproveitando o título
+      visível em vez de duplicar o texto.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      A seção passa a ser anunciada como “região Sobre o projeto”, e a lista de regiões do leitor de
+      tela vira um índice navegável da página. Se o título mudar, o nome da região muda junto — não
+      há risco de o texto visível e o texto anunciado ficarem diferentes.
+    </dd>
+  </dl>
+</div>
+
+<h3>4.3 <code>&lt;article&gt;</code> — cada oficina</h3>
+
+<pre>&lt;article class="cartao"&gt;
+  &lt;h3&gt;Internet segura&lt;/h3&gt;
+  &lt;p&gt;Como reconhecer golpes, criar senhas fortes, usar aplicativos de banco...&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Carga horária: 12 horas&lt;/li&gt;
+    &lt;li&gt;Turmas: sábados, das 9h às 12h&lt;/li&gt;
+    &lt;li&gt;Vagas por turma: 20&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/article&gt;</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tag</dt>
+    <dd><code>&lt;article&gt;</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Marcar um conteúdo completo e independente do restante da página.</dd>
+    <dt>Por que foi escolhida</dt>
+    <dd>
+      A descrição de uma oficina continua fazendo sentido sozinha — em um resultado de busca ou
+      compartilhada isoladamente. Esse é exatamente o teste que separa <code>&lt;article&gt;</code>
+      de <code>&lt;section&gt;</code>.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      Os dados de cada oficina estão em <code>&lt;ul&gt;</code>, e não em parágrafos separados por
+      <code>&lt;br&gt;</code>. O leitor anuncia “lista com 3 itens”, deixando claro que carga horária,
+      horário e vagas são informações do mesmo conjunto.
+    </dd>
+  </dl>
+</div>
+
+<h3>4.4 <code>&lt;figure&gt;</code>, <code>&lt;figcaption&gt;</code> e o atributo <code>alt</code></h3>
+
+<pre>&lt;figure class="figura"&gt;
+  &lt;img src="img/oficina.svg"
+       <strong>alt="Ilustração de uma turma da oficina: uma instrutora em pé aponta para um
+            quadro com o desenho de uma janela de navegador, enquanto quatro alunos de
+            idades diferentes usam computadores."</strong>&gt;
+  &lt;figcaption&gt;
+    Turma da oficina “Internet Segura”, realizada no salão comunitário da Vila Esperança.
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tag</dt>
+    <dd><code>&lt;figure&gt;</code> + <code>&lt;figcaption&gt;</code> + <code>alt</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Apresentar uma imagem com legenda e oferecer uma alternativa textual ao conteúdo visual.</dd>
+    <dt>Por que foi escolhida</dt>
+    <dd>
+      Colocar a legenda em um <code>&lt;p&gt;</code> logo abaixo da imagem produziria o mesmo visual,
+      mas a ligação entre as duas existiria apenas na aparência. Com <code>&lt;figure&gt;</code> a
+      relação é declarada no código.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      <strong>O <code>alt</code> e a <code>figcaption</code> têm papéis diferentes.</strong>
+      A legenda contextualiza (onde e quando foi a aula); o <code>alt</code>
+      <em>descreve o que se vê</em>, para quem não vê. Por isso ele não repete a legenda nem começa
+      com “imagem de” — o leitor de tela já anuncia que é uma imagem. Critério
+      <strong>WCAG 1.1.1 – Conteúdo não textual</strong>.
+    </dd>
+  </dl>
+</div>
+
+<div class="destaque-box">
+  <p>
+    <strong>Regra prática do <code>alt</code>:</strong> imagem que <em>informa</em> recebe descrição
+    do conteúdo; imagem apenas <em>decorativa</em> recebe <code>alt=""</code> (vazio, mas presente),
+    para que o leitor de tela a ignore em vez de ler o nome do arquivo. Nesta página as duas imagens
+    informam, e por isso as duas têm descrição.
+  </p>
+</div>
+
+<h3>4.5 <code>&lt;aside&gt;</code> e <code>&lt;blockquote&gt;</code></h3>
+
+<pre>&lt;blockquote class="depoimento"&gt;
+  &lt;p&gt;“Eu tinha medo de usar o aplicativo do banco. Hoje pago minhas contas sozinha...”&lt;/p&gt;
+  &lt;footer&gt;— Dona Marlene, 71 anos, turma de Internet Segura&lt;/footer&gt;
+&lt;/blockquote&gt;
+
+&lt;aside class="aviso" aria-labelledby="titulo-voluntario"&gt;
+  &lt;h3 id="titulo-voluntario"&gt;Quer ser voluntário?&lt;/h3&gt;
+  ...
+&lt;/aside&gt;</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tags</dt>
+    <dd><code>&lt;blockquote&gt;</code> e <code>&lt;aside&gt;</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Marcar uma citação de terceiros e um bloco de conteúdo complementar.</dd>
+    <dt>Por que foram escolhidas</dt>
+    <dd>
+      O depoimento é a fala de outra pessoa, e não do site — <code>&lt;blockquote&gt;</code> registra
+      isso. A chamada para voluntariado é relacionada, porém acessória: é o caso típico de
+      <code>&lt;aside&gt;</code>.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      Visualmente, as aspas e a borda lateral já indicam “isto é uma citação”. Quem usa leitor de tela
+      não recebe essa pista visual: a tag é o que informa a mudança de autoria. O <code>&lt;aside&gt;</code>
+      vira a região “complementar”, deixando claro que a pessoa pode pulá-lo sem perder o essencial.
+    </dd>
+  </dl>
+</div>
+
+<!-- ===================== 5 ===================== -->
+<h2 class="quebra">5. Desenvolvimento do CSS</h2>
+
+<p>
+  O arquivo <code>css/estilo.css</code> foi organizado em oito blocos comentados, do mais geral ao
+  mais específico: variáveis de cor, reset e base, acessibilidade, cabeçalho e menu, conteúdo,
+  formulário, rodapé e, por fim, responsividade.
+</p>
+
+<h3>5.1 Paleta em variáveis, com contraste verificado</h3>
+
+<pre>:root {
+  --tinta:        #14181f;   <span class="c">/* texto sobre branco  -&gt; 17.8:1 */</span>
+  --tinta-suave:  #454d59;   <span class="c">/* textos de apoio     -&gt;  8.5:1 */</span>
+  --marca:        #0b4f6c;   <span class="c">/* azul do projeto     -&gt;  8.9:1 */</span>
+  --marca-escura: #072f41;   <span class="c">/* fundos escuros      -&gt; 14.1:1 com branco */</span>
+  --destaque:     #9c3412;   <span class="c">/* foco e obrigatório  -&gt;  7.2:1 */</span>
+  --foco-claro:   #ffd166;   <span class="c">/* anel de foco sobre fundo escuro */</span>
+}</pre>
+
+<p>
+  Centralizar as cores em variáveis (<code>custom properties</code>) tem um efeito direto sobre a
+  acessibilidade: em vez de espalhar dezenas de tons pelo arquivo, existem <strong>seis cores
+  conferidas</strong>. Cada uma foi medida contra o fundo em que aparece e a relação de contraste
+  ficou registrada em comentário, ao lado da cor. O capítulo 8 traz a tabela completa das medições.
+</p>
+
+<h3>5.2 Base legível</h3>
+
+<pre>body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
+  font-size: 18px;      <span class="c">/* maior que o padrão de 16px */</span>
+  line-height: 1.6;     <span class="c">/* espaçamento generoso entre linhas */</span>
+  color: var(--tinta);
+  background-color: var(--fundo);
+}
+
+<span class="c">/* Sublinhado sempre presente nos links: a cor sozinha não pode ser
+   o único meio de identificar um link (WCAG 1.4.1 - Uso de cor). */</span>
+a {
+  color: var(--marca);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}</pre>
+
+<p>
+  Três decisões pequenas com bastante impacto: fonte sem serifa, corpo de 18&nbsp;px e entrelinha de
+  1,6. Somadas, tornam o texto mais confortável para pessoas com baixa visão e dislexia. E o
+  sublinhado dos links foi mantido de propósito: removê-lo é comum em sites “modernos”, mas quem não
+  distingue cores passa a não ter como saber onde estão os links.
+</p>
+
+<h3>5.3 Layout com Grid e responsividade</h3>
+
+<pre>.cartoes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .sobre__grade,
+  .cartoes,
+  .rodape__colunas { grid-template-columns: 1fr; }   <span class="c">/* tudo em uma coluna */</span>
+}</pre>
+
+<p>
+  O CSS Grid permitiu montar as colunas <strong>sem alterar a ordem do HTML</strong>. Isso importa
+  porque o leitor de tela e a tecla <kbd>Tab</kbd> seguem a ordem do código, não a ordem visual: se
+  o layout reorganizasse os blocos, a leitura ficaria fora de sequência (critério
+  <strong>WCAG 1.3.2 – Sequência significativa</strong>).
+</p>
+
+<pre><span class="c">/* Respeita quem pediu menos animação no sistema operacional. */</span>
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+<span class="c">/* Modo de alto contraste do Windows: mantém o anel de foco visível. */</span>
+@media (forced-colors: active) {
+  :focus, :focus-visible { outline: 3px solid Highlight; }
+}</pre>
+
+<p>
+  Essas duas <em>media queries</em> respeitam configurações que a pessoa já fez no próprio sistema
+  operacional. No modo de alto contraste do Windows, as cores do site são substituídas pelas do
+  sistema — e a palavra-chave <code>Highlight</code> garante que o anel de foco continue visível com
+  a cor escolhida pelo usuário.
+</p>
+
+<!-- ===================== 6 ===================== -->
+<h2>6. Implementação dos recursos de acessibilidade</h2>
+
+<h3>6.1 Link de salto (<em>skip link</em>)</h3>
+
+<pre>&lt;a class="link-salto" href="#conteudo"&gt;Pular para o conteúdo principal&lt;/a&gt;</pre>
+
+<pre>.link-salto {
+  position: absolute;
+  left: -9999px;            <span class="c">/* fica fora da tela... */</span>
+  background-color: var(--destaque);
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+}
+
+.link-salto:focus {
+  left: 0;                  <span class="c">/* ...e aparece ao receber o foco do teclado */</span>
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tag</dt>
+    <dd><code>&lt;a href="#conteudo"&gt;</code> como primeiro elemento do <code>&lt;body&gt;</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Permitir pular os blocos repetidos (logotipo e menu) e ir direto ao conteúdo.</dd>
+    <dt>Por que foi escolhido</dt>
+    <dd>
+      Quem usa mouse pula o menu com um olhar. Quem navega por teclado teria de passar por
+      <strong>todos</strong> os links do cabeçalho a cada página. O link de salto resolve isso com uma
+      única tecla.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      Atende ao critério <strong>WCAG 2.4.1 – Ignorar blocos</strong>. Detalhe importante: o link é
+      escondido com <code>position: absolute</code> fora da tela, e <strong>não</strong> com
+      <code>display: none</code> — este último o removeria da ordem de tabulação e o tornaria
+      inalcançável. Como o próprio fundo do link é laranja, o anel de foco foi trocado para branco,
+      senão ele desapareceria sobre o botão.
+    </dd>
+  </dl>
+</div>
+
+<h3>6.2 Destaque visual do elemento em foco</h3>
+
+<pre><span class="c">/* Qualquer elemento focável recebe um anel espesso e afastado. */</span>
+:focus {
+  outline: 3px solid var(--destaque);
+  outline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+<span class="c">/* Sobre fundos escuros o laranja perderia contraste: usa-se o amarelo. */</span>
+.cabecalho :focus,
+.rodape :focus { outline-color: var(--foco-claro); }</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Seletores</dt>
+    <dd><code>:focus</code> e <code>:focus-visible</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Mostrar, o tempo todo, <em>onde</em> o teclado está.</dd>
+    <dt>Por que foram escolhidos</dt>
+    <dd>
+      <code>:focus-visible</code> exibe o anel para quem navega por teclado sem poluir a tela de quem
+      usa mouse; <code>:focus</code> foi mantido como garantia em navegadores que ainda não suportam
+      o primeiro.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      É o critério <strong>WCAG 2.4.7 – Foco visível</strong>. O erro mais comum em sites reais é
+      <code>outline: none</code> — o anel some, e navegar por teclado vira um chute às cegas. Aqui foi
+      feito o oposto: anel de 3&nbsp;px, cor com 7,2:1 de contraste e <code>outline-offset</code> para
+      não encostar no texto. E como o mesmo laranja sumiria sobre o cabeçalho azul-escuro, esses
+      trechos usam o amarelo claro (9,8:1).
+    </dd>
+  </dl>
+</div>
+
+<figure>
+  <img src="captura-07-foco-link-salto.png" alt="O link Pular para o conteúdo principal aparece no
+       topo esquerdo, em laranja com contorno branco, após um toque na tecla Tab.">
+  <figcaption>Figura 1 — Primeiro <kbd>Tab</kbd> na página: o link de salto aparece com anel de foco branco.</figcaption>
+</figure>
+
+<figure>
+  <img src="captura-08-foco-menu.png" alt="O terceiro item do menu, Depoimentos dos alunos,
+       aparece contornado por um anel amarelo.">
+  <figcaption>Figura 2 — Quarto <kbd>Tab</kbd>: o foco chega ao menu e usa o anel amarelo, de alto contraste sobre o fundo escuro.</figcaption>
+</figure>
+
+<h3>6.3 Links e botões com texto descritivo</h3>
+
+<table>
+  <thead>
+    <tr><th style="width:44%">Evitado</th><th>Usado na página</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>“Clique aqui”</td><td>“Ver o formulário de inscrição nas oficinas”</td></tr>
+    <tr><td>“Saiba mais”</td><td>“Enviar e-mail para a equipe de voluntariado do Conecta Bairro”</td></tr>
+    <tr><td>“Enviar”</td><td>“Enviar inscrição na oficina”</td></tr>
+    <tr><td>“Limpar”</td><td>“Limpar todos os campos do formulário”</td></tr>
+  </tbody>
+</table>
+
+<p>
+  O motivo é concreto: leitores de tela permitem listar <strong>somente os links</strong> da página,
+  fora do contexto em que aparecem. Uma lista com quatro “clique aqui” é inútil; a lista da coluna
+  direita continua compreensível isolada. Critério <strong>WCAG 2.4.4 – Finalidade do link</strong>.
+</p>
+
+<p>
+  O link externo do rodapé também declara o próprio idioma, já que o destino está em inglês:
+</p>
+
+<pre>&lt;a href="https://www.w3.org/WAI/WCAG22/quickref/" <strong>hreflang="en"</strong> rel="external"&gt;
+  Consultar as recomendações WCAG 2.2 no site do W3C (em inglês)
+&lt;/a&gt;</pre>
+
+<!-- ===================== 7 ===================== -->
+<h2 class="quebra">7. Construção do formulário</h2>
+
+<p>
+  O formulário é a parte mais sensível da página: é onde a pessoa precisa <em>agir</em>, e não apenas
+  ler. Um formulário mal marcado transforma a inscrição em algo impossível de concluir sem ajuda.
+</p>
+
+<h3>7.1 Associação entre <code>&lt;label&gt;</code> e campo</h3>
+
+<pre>&lt;div class="campo"&gt;
+  &lt;label <strong>for="email"</strong>&gt;E-mail &lt;span class="obrigatorio"&gt;*&lt;/span&gt;&lt;/label&gt;
+  &lt;input type="email" <strong>id="email"</strong> name="email" autocomplete="email" required
+         <strong>aria-describedby="dica-email"</strong>&gt;
+  &lt;p class="dica" <strong>id="dica-email"</strong>&gt;Usaremos apenas para confirmar sua matrícula.
+     Exemplo: maria@email.com&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tags / atributos</dt>
+    <dd><code>&lt;label for&gt;</code> ↔ <code>id</code> do campo, mais <code>aria-describedby</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Dar nome ao campo e ligar a ele o texto de ajuda.</dd>
+    <dt>Por que foram escolhidos</dt>
+    <dd>
+      O <code>for</code> precisa ser <strong>idêntico</strong> ao <code>id</code>. É essa igualdade —
+      e não a proximidade visual — que cria a associação. Um texto solto acima do campo parece um
+      rótulo, mas não é.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      Com a associação, o leitor de tela anuncia “E-mail, obrigatório, caixa de edição” ao chegar no
+      campo, e completa com a dica ligada por <code>aria-describedby</code> — em vez de anunciar
+      apenas “caixa de edição”, sem dizer o que digitar. Ganho extra: clicar no rótulo passa a mover
+      o foco para o campo, o que amplia bastante a área de acerto para quem tem dificuldade motora.
+      Critérios <strong>WCAG 1.3.1</strong> e <strong>3.3.2 – Rótulos ou instruções</strong>.
+    </dd>
+  </dl>
+</div>
+
+<p>
+  Os tipos de campo também foram escolhidos com cuidado: <code>type="email"</code> e
+  <code>type="tel"</code> fazem o celular abrir o teclado apropriado, e o <code>autocomplete</code>
+  permite que o navegador preencha os dados automaticamente — o que reduz o esforço de digitação
+  (critério <strong>WCAG 1.3.5 – Identificar a finalidade do campo</strong>).
+</p>
+
+<h3>7.2 <code>&lt;fieldset&gt;</code> e <code>&lt;legend&gt;</code> nos grupos</h3>
+
+<pre>&lt;fieldset class="grupo-opcoes"&gt;
+  &lt;legend&gt;Turno de preferência&lt;/legend&gt;
+
+  &lt;div class="opcao"&gt;
+    &lt;input type="radio" id="turno-manha" name="turno" value="manha" checked&gt;
+    &lt;label for="turno-manha"&gt;Manhã&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class="opcao"&gt;
+    &lt;input type="radio" id="turno-tarde" name="turno" value="tarde"&gt;
+    &lt;label for="turno-tarde"&gt;Tarde&lt;/label&gt;
+  &lt;/div&gt;
+  ...
+&lt;/fieldset&gt;</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tags</dt>
+    <dd><code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code></dd>
+    <dt>Finalidade</dt>
+    <dd>Agrupar campos do mesmo assunto e dar um título ao grupo.</dd>
+    <dt>Por que foram escolhidas</dt>
+    <dd>
+      Em grupos de <em>radio</em> e <em>checkbox</em> elas são indispensáveis. Cada rótulo isolado diz
+      apenas “Manhã”, “Tarde”, “Noite” — falta a pergunta.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      A <code>&lt;legend&gt;</code> é repetida junto de cada opção: o leitor anuncia “Turno de
+      preferência: Manhã, botão de opção marcado, 1 de 3”. Sem o <code>fieldset</code>, a pessoa
+      ouviria só “Manhã” e teria de adivinhar a que pergunta aquilo responde. O formulário tem quatro
+      grupos: dados pessoais, escolha da oficina, turno (aninhado) e recursos de acessibilidade.
+    </dd>
+  </dl>
+</div>
+
+<h3>7.3 Campos obrigatórios sem depender da cor</h3>
+
+<pre>&lt;p id="ajuda-formulario"&gt;
+  Preencha os dados abaixo para reservar sua vaga. Os campos marcados com
+  asterisco (&lt;span class="obrigatorio"&gt;*&lt;/span&gt;) são obrigatórios.
+&lt;/p&gt;
+
+&lt;form class="formulario" ... <strong>aria-describedby="ajuda-formulario"</strong>&gt;</pre>
+
+<p>
+  A obrigatoriedade é comunicada por <strong>três caminhos independentes</strong>: o atributo
+  <code>required</code> (que o leitor de tela anuncia), o asterisco visível e a frase que explica o
+  significado do asterisco. Uma pessoa daltônica não perceberia a cor laranja do asterisco, mas
+  continua recebendo a informação pelos outros dois caminhos — que é o que exige o critério
+  <strong>WCAG 1.4.1 – Uso de cor</strong>.
+</p>
+
+<h3>7.4 Botões: <code>&lt;button&gt;</code> de verdade</h3>
+
+<pre>&lt;div class="acoes"&gt;
+  &lt;button type="submit" class="botao botao--primario"&gt;Enviar inscrição na oficina&lt;/button&gt;
+  &lt;button type="reset" class="botao botao--secundario"&gt;Limpar todos os campos do formulário&lt;/button&gt;
+&lt;/div&gt;</pre>
+
+<div class="analise">
+  <dl>
+    <dt>Tag</dt>
+    <dd><code>&lt;button&gt;</code> com <code>type</code> explícito</dd>
+    <dt>Finalidade</dt>
+    <dd>Executar as ações de enviar e de limpar o formulário.</dd>
+    <dt>Por que foi escolhida</dt>
+    <dd>
+      Uma <code>&lt;div class="botao"&gt;</code> teria a mesma aparência, mas não receberia foco, não
+      responderia a <kbd>Enter</kbd> nem a <kbd>Espaço</kbd> e não seria anunciada como botão. Todo
+      esse comportamento vem de graça com a tag nativa.
+    </dd>
+    <dt>Acessibilidade</dt>
+    <dd>
+      O texto descreve a ação completa, e não um verbo solto. Os botões têm
+      <code>min-height: 48px</code>, um alvo confortável para quem tem tremor ou usa a tela sensível
+      ao toque (critério <strong>WCAG 2.5.8 – Tamanho do alvo</strong>).
+    </dd>
+  </dl>
+</div>
+
+<figure>
+  <img class="estreita" src="captura-09-foco-campo.png" alt="Campo E-mail contornado por um anel
+       laranja de três pixels, com o rótulo acima e a dica logo abaixo.">
+  <figcaption>Figura 3 — Rótulo, campo em foco e texto de ajuda associado por <code>aria-describedby</code>.</figcaption>
+</figure>
+
+<figure>
+  <img class="estreita" src="captura-10-foco-botao.png" alt="Os botões Enviar inscrição na oficina e
+       Limpar todos os campos do formulário, lado a lado.">
+  <figcaption>Figura 4 — Botões com texto que descreve a ação por completo.</figcaption>
+</figure>
+
+<!-- ===================== 8 ===================== -->
+<h2 class="quebra">8. Testes de acessibilidade realizados</h2>
+
+<h3>8.1 Teste 1 — Navegação apenas pelo teclado</h3>
+
+<p>
+  A página foi percorrida do início ao fim usando somente <kbd>Tab</kbd>, <kbd>Shift+Tab</kbd>,
+  <kbd>Enter</kbd>, <kbd>Espaço</kbd> e as setas. O teste foi automatizado com o Chrome DevTools
+  Protocol, que dispara eventos reais de teclado e registra qual elemento ficou em foco a cada passo.
+  Resultado: <strong>23 paradas, na mesma ordem do conteúdo visual</strong>, sem nenhuma armadilha de
+  foco.
+</p>
+
+<table>
+  <thead><tr><th style="width:12%">Tab</th><th>Elemento que recebeu o foco</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Link “Pular para o conteúdo principal”</td></tr>
+    <tr><td>2 a 5</td><td>Os quatro links do menu principal</td></tr>
+    <tr><td>6</td><td>Link “Ver o formulário de inscrição nas oficinas”</td></tr>
+    <tr><td>7</td><td>Link “Enviar e-mail para a equipe de voluntariado”</td></tr>
+    <tr><td>8 a 10</td><td>Campos Nome completo, E-mail e Telefone</td></tr>
+    <tr><td>11</td><td>Lista “Oficina desejada”</td></tr>
+    <tr><td>12</td><td>Grupo de turno (as setas alternam entre as três opções)</td></tr>
+    <tr><td>13 a 15</td><td>As três caixas de seleção de recursos de acessibilidade</td></tr>
+    <tr><td>16</td><td>Área de texto “Outras observações”</td></tr>
+    <tr><td>17 e 18</td><td>Botões de enviar e de limpar</td></tr>
+    <tr><td>19 a 23</td><td>Links do rodapé (telefone, e-mail e links úteis)</td></tr>
+  </tbody>
+</table>
+
+<div class="destaque-box">
+  <p>
+    Note o comportamento correto do grupo de <em>radio</em>: ele ocupa <strong>uma única parada</strong>
+    de <kbd>Tab</kbd>, e a troca entre Manhã, Tarde e Noite é feita com as setas. Esse é o padrão
+    nativo do HTML — reproduzi-lo com <code>&lt;div&gt;</code> exigiria bastante JavaScript e
+    provavelmente sairia pior.
+  </p>
+</div>
+
+<h3>8.2 Teste 2 — Contraste de cores</h3>
+
+<p>
+  Todos os pares de cor usados na página foram medidos pela fórmula de contraste da WCAG. A exigência
+  é de <strong>4,5:1</strong> para texto normal e <strong>3:1</strong> para bordas e componentes de
+  interface (critérios <strong>1.4.3</strong> e <strong>1.4.11</strong>).
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Elemento</th><th style="width:15%">Frente</th><th style="width:15%">Fundo</th>
+      <th style="width:13%">Medido</th><th style="width:12%">Mínimo</th><th style="width:13%">Resultado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Texto do corpo</td><td>#14181f</td><td>#ffffff</td><td>17,79:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Textos de apoio e dicas</td><td>#454d59</td><td>#ffffff</td><td>8,54:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Links e títulos</td><td>#0b4f6c</td><td>#ffffff</td><td>8,94:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Asterisco e anel de foco</td><td>#9c3412</td><td>#ffffff</td><td>7,21:1</td><td>3:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Texto do cabeçalho e rodapé</td><td>#ffffff</td><td>#072f41</td><td>14,08:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Slogan do cabeçalho</td><td>#d7e4ea</td><td>#072f41</td><td>10,84:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Links do rodapé</td><td>#b9e2f5</td><td>#072f41</td><td>10,23:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Texto do botão primário</td><td>#ffffff</td><td>#0b4f6c</td><td>8,94:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Borda dos campos do formulário</td><td>#6b7681</td><td>#ffffff</td><td>4,63:1</td><td>3:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Texto sobre os cartões</td><td>#14181f</td><td>#f3f6f8</td><td>16,39:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Texto sobre o azul claro</td><td>#14181f</td><td>#e6f0f4</td><td>15,37:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Legenda da figura</td><td>#454d59</td><td>#e6f0f4</td><td>7,38:1</td><td>4,5:1</td><td class="ok">Passa</td></tr>
+    <tr><td>Anel de foco sobre fundo escuro</td><td>#ffd166</td><td>#072f41</td><td>9,76:1</td><td>3:1</td><td class="ok">Passa</td></tr>
+  </tbody>
+</table>
+
+<p>
+  Nenhum par ficou abaixo do mínimo — a menor margem é a da borda dos campos (4,63:1 para um mínimo
+  de 3:1). Vale notar que o primeiro tom de cinza testado para essa borda reprovou, e precisou ser
+  escurecido: bordas claras “elegantes” são um ponto de falha muito frequente.
+</p>
+
+<h3>8.3 Teste 3 — Inspeção da estrutura do documento</h3>
+
+<p>
+  A árvore da página foi inspecionada no navegador para conferir os requisitos estruturais. Números
+  verificados na versão entregue:
+</p>
+
+<table>
+  <thead><tr><th style="width:48%">Verificação</th><th style="width:30%">Resultado</th><th>Situação</th></tr></thead>
+  <tbody>
+    <tr><td>Idioma declarado</td><td><code>lang="pt-BR"</code></td><td class="ok">OK</td></tr>
+    <tr><td>Quantidade de <code>&lt;h1&gt;</code></td><td>1 (único)</td><td class="ok">OK</td></tr>
+    <tr><td>Hierarquia de títulos sem saltos</td><td>h1 → h2 → h3</td><td class="ok">OK</td></tr>
+    <tr><td>Regiões principais</td><td>1 header, 1 nav, 1 main, 1 footer</td><td class="ok">OK</td></tr>
+    <tr><td>Seções e artigos</td><td>4 <code>section</code> no <code>main</code>, 3 <code>article</code>, 1 <code>aside</code></td><td class="ok">OK</td></tr>
+    <tr><td>Imagens com <code>alt</code> preenchido</td><td>2 de 2</td><td class="ok">OK</td></tr>
+    <tr><td>Campos sem rótulo associado</td><td>0 de 11</td><td class="ok">OK</td></tr>
+    <tr><td>Grupos de campos</td><td>4 <code>fieldset</code>, 4 <code>legend</code></td><td class="ok">OK</td></tr>
+    <tr><td>Botões nativos</td><td>2 <code>&lt;button&gt;</code></td><td class="ok">OK</td></tr>
+    <tr><td>Listas de informação</td><td>8 listas, 25 itens</td><td class="ok">OK</td></tr>
+  </tbody>
+</table>
+
+<h3>8.4 Teste 4 — Zoom e telas pequenas</h3>
+
+<p>
+  A página foi aberta com 200% de zoom e em uma janela de 430&nbsp;px de largura. Com o
+  <code>@media (max-width: 860px)</code>, as colunas viram uma só, nenhum conteúdo é cortado e não
+  aparece rolagem horizontal — critério <strong>WCAG 1.4.10 – Refluxo</strong>.
+</p>
+
+<h3>8.5 Limitações do que foi testado</h3>
+
+<div class="destaque-box">
+  <p>
+    Por honestidade técnica, vale registrar o que <strong>não</strong> foi feito: a página não foi
+    submetida ao validador do W3C nem a extensões como axe DevTools ou WAVE, e não foi ouvida em um
+    leitor de tela real (NVDA ou VoiceOver). Os testes descritos acima são estruturais, de contraste e
+    de teclado. Uma verificação com leitor de tela e com pessoas usuárias reais é o passo natural
+    seguinte — ferramentas automáticas detectam por volta de 30% dos problemas de acessibilidade;
+    o resto só aparece no uso.
+  </p>
+</div>
+
+<!-- ===================== 9 ===================== -->
+<h2 class="quebra">9. Capturas de tela da página</h2>
+
+<figure>
+  <img src="captura-02-topo.png" alt="Topo da página: cabeçalho azul-escuro com logotipo, título
+       Conecta Bairro, slogan e menu de quatro itens; abaixo, a seção Sobre o projeto com texto,
+       lista de números e a ilustração da oficina.">
+  <figcaption>Figura 5 — Cabeçalho, menu de navegação e a seção “Sobre o projeto”.</figcaption>
+</figure>
+
+<figure>
+  <img src="captura-03-oficinas.png" alt="Seção Oficinas oferecidas com três cartões lado a lado:
+       Informática básica, Internet segura e Currículo e trabalho digital.">
+  <figcaption>Figura 6 — Seção “Oficinas oferecidas”: cada cartão é um <code>&lt;article&gt;</code>.</figcaption>
+</figure>
+
+<figure>
+  <img src="captura-04-depoimentos.png" alt="Seção Depoimentos com duas citações destacadas em azul
+       claro e, abaixo, um bloco tracejado com a chamada Quer ser voluntário?">
+  <figcaption>Figura 7 — Depoimentos em <code>&lt;blockquote&gt;</code> e o bloco complementar em <code>&lt;aside&gt;</code>.</figcaption>
+</figure>
+
+<figure>
+  <img src="captura-05-formulario.png" alt="Formulário de inscrição com os grupos Dados pessoais,
+       Escolha da oficina e Recursos de acessibilidade necessários, e os dois botões ao final.">
+  <figcaption>Figura 8 — Formulário completo, com os quatro <code>&lt;fieldset&gt;</code> e seus rótulos.</figcaption>
+</figure>
+
+<figure>
+  <img src="captura-06-rodape.png" alt="Rodapé azul-escuro em três colunas: Contato, Horário de
+       atendimento e Links úteis.">
+  <figcaption>Figura 9 — Rodapé com contato, horários e links úteis.</figcaption>
+</figure>
+
+<figure>
+  <img class="mobile" src="captura-11-mobile.png" alt="A mesma página em uma tela estreita de
+       celular, com o conteúdo empilhado em uma única coluna.">
+  <figcaption>Figura 10 — Versão em tela de 430&nbsp;px: tudo em uma coluna, sem rolagem horizontal.</figcaption>
+</figure>
+
+<!-- ===================== 10 ===================== -->
+<h2 class="quebra">10. Conclusão: dificuldades e aprendizados</h2>
+
+<h3>10.1 Principais dificuldades</h3>
+
+<h4>Escolher entre <code>&lt;section&gt;</code> e <code>&lt;article&gt;</code></h4>
+<p>
+  Foi a dúvida mais recorrente, porque as duas tags não produzem nenhuma diferença visual. A regra
+  que resolveu: se o bloco continuaria fazendo sentido publicado sozinho, é <code>&lt;article&gt;</code>;
+  se ele só existe como parte da página, é <code>&lt;section&gt;</code>. Por isso cada oficina virou
+  um <code>&lt;article&gt;</code>, e os agrupamentos temáticos ficaram como <code>&lt;section&gt;</code>.
+</p>
+
+<h4>Descobrir que <code>&lt;section&gt;</code> sozinha não vira região</h4>
+<p>
+  A expectativa era que bastasse usar a tag. Na prática, uma <code>&lt;section&gt;</code> sem nome
+  acessível não é anunciada como região pelo leitor de tela. Foi preciso adicionar
+  <code>aria-labelledby</code> apontando para o <code>id</code> do título de cada seção — um detalhe
+  que quase não aparece nos tutoriais introdutórios.
+</p>
+
+<h4>Escrever um bom texto alternativo</h4>
+<p>
+  Mais difícil do que parecia. As primeiras versões do <code>alt</code> ou repetiam a legenda, ou
+  eram vagas demais (“imagem da oficina”). O critério que ajudou: <em>descrever o que uma pessoa
+  precisaria saber daquela imagem se não pudesse vê-la</em> — e lembrar que <code>alt</code> e
+  <code>figcaption</code> respondem a perguntas diferentes.
+</p>
+
+<h4>Ajustar as cores até passarem no contraste</h4>
+<p>
+  A paleta escolhida inicialmente era mais clara e mais “suave”. Vários pares reprovaram na medição —
+  a borda dos campos e o cinza dos textos de apoio, principalmente. Foi necessário escurecer os tons
+  e medir de novo. O aprendizado: contraste não se avalia no olho, se calcula.
+</p>
+
+<h4>O anel de foco que sumia</h4>
+<p>
+  Definido um único anel laranja para toda a página, ele desaparecia sobre o cabeçalho azul-escuro e
+  sobre o próprio link de salto, que também é laranja. A solução foi manter o anel padrão e
+  sobrescrever a cor nos contextos escuros (amarelo) e no link de salto (branco).
+</p>
+
+<h3>10.2 Principais aprendizados</h3>
+
+<ul>
+  <li>
+    <strong>A tag certa já traz acessibilidade pronta.</strong> <code>&lt;button&gt;</code>,
+    <code>&lt;label&gt;</code> e <code>&lt;fieldset&gt;</code> entregam foco, atalhos de teclado e
+    anúncios corretos sem nenhuma linha de JavaScript. Recriar esses comportamentos com
+    <code>&lt;div&gt;</code> dá mais trabalho e costuma sair pior.
+  </li>
+  <li>
+    <strong>Acessibilidade é decisão de projeto, não etapa final.</strong> Escolher a paleta já
+    medindo contraste custa alguns minutos; refazer as cores de um site pronto custa muito mais.
+  </li>
+  <li>
+    <strong>O HTML descreve o conteúdo; o CSS descreve a aparência.</strong> Sempre que a vontade era
+    trocar uma tag para obter um efeito visual, o caminho correto era manter a tag e resolver no CSS.
+  </li>
+  <li>
+    <strong>ARIA complementa, não substitui.</strong> Os poucos atributos ARIA usados
+    (<code>aria-label</code>, <code>aria-labelledby</code>, <code>aria-describedby</code>) apenas
+    preenchem lacunas do HTML nativo. A primeira regra do ARIA é justamente não usá-lo quando existe
+    uma tag HTML equivalente.
+  </li>
+  <li>
+    <strong>O teste do teclado é o mais rápido e o mais revelador.</strong> Percorrer a página inteira
+    com <kbd>Tab</kbd> leva menos de um minuto e expõe de imediato foco invisível, ordem ilógica e
+    elementos inalcançáveis.
+  </li>
+  <li>
+    <strong>Todo mundo ganha.</strong> Texto maior, bom contraste, alvos de clique generosos e rótulos
+    claros melhoram a experiência de qualquer pessoa — inclusive de quem usa o celular no sol ou está
+    com pressa.
+  </li>
+</ul>
+
+<!-- ===================== 11 ===================== -->
+<h2>11. Repositório no GitHub</h2>
+
+<p>
+  O projeto completo — <code>index.html</code>, <code>css/estilo.css</code>, as imagens em
+  <code>img/</code> e este tutorial em <code>docs/</code> — está publicado no repositório público:
+</p>
+
+<p class="link-repo">https://github.com/SEU-USUARIO/pagina-inclusiva</p>
+
+<p>
+  Para abrir a página basta baixar o repositório e abrir o arquivo <code>index.html</code> em
+  qualquer navegador: o projeto usa apenas HTML e CSS, sem dependências, servidor ou etapa de
+  compilação.
+</p>
+
+</body>
+</html>

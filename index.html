@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conecta Bairro e um projeto social gratuito de inclusao digital que oferece oficinas de informatica para jovens e pessoas idosas da comunidade.">
+  <title>Conecta Bairro | Projeto de Inclusão Digital</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+  <!-- Link de salto: primeiro elemento focavel da pagina.
+       Permite que quem navega por teclado ou leitor de tela pule o menu
+       e va direto ao conteudo principal. Fica visivel apenas com :focus. -->
+  <a class="link-salto" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <!-- ============ CABECALHO ============ -->
+  <header class="cabecalho">
+    <div class="cabecalho__marca">
+      <img src="img/logo.svg" alt="Logotipo do Conecta Bairro: duas pessoas lado a lado sob um sinal de conexão sem fio." width="56" height="56">
+      <div>
+        <h1>Conecta Bairro</h1>
+        <p class="cabecalho__slogan">Inclusão digital gratuita para a nossa comunidade</p>
+      </div>
+    </div>
+
+    <!-- ============ MENU DE NAVEGACAO ============ -->
+    <nav class="menu" aria-label="Menu principal">
+      <ul>
+        <li><a href="#sobre">Sobre o projeto</a></li>
+        <li><a href="#oficinas">Oficinas oferecidas</a></li>
+        <li><a href="#depoimentos">Depoimentos dos alunos</a></li>
+        <li><a href="#inscricao">Formulário de inscrição</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============ CONTEUDO PRINCIPAL ============ -->
+  <main id="conteudo" class="conteudo">
+
+    <!-- ---------- SECAO 1: SOBRE ---------- -->
+    <section id="sobre" aria-labelledby="titulo-sobre">
+      <h2 id="titulo-sobre">Sobre o projeto</h2>
+
+      <div class="sobre__grade">
+        <div>
+          <p>
+            O <strong>Conecta Bairro</strong> é um projeto social sem fins lucrativos criado em 2019
+            no bairro Vila Esperança. Nossa missão é reduzir a exclusão digital oferecendo
+            <strong>oficinas gratuitas de informática</strong> para jovens em busca do primeiro emprego
+            e para pessoas idosas que querem usar a internet com autonomia e segurança.
+          </p>
+
+          <h3>Nossos números em 2025</h3>
+          <!-- Lista de informacoes: agrupa dados relacionados de forma que o leitor
+               de tela anuncie "lista com 4 itens", dando nocao de quantidade. -->
+          <ul class="lista-numeros">
+            <li><strong>480</strong> pessoas formadas nas oficinas</li>
+            <li><strong>32</strong> voluntários ativos no projeto</li>
+            <li><strong>6</strong> turmas simultâneas por semestre</li>
+            <li><strong>100%</strong> das vagas gratuitas</li>
+          </ul>
+
+          <p>
+            <a class="link-texto" href="#inscricao">Ver o formulário de inscrição nas oficinas</a>
+          </p>
+        </div>
+
+        <!-- figure + figcaption: associa semanticamente a imagem a sua legenda visivel. -->
+        <figure class="figura">
+          <img src="img/oficina.svg"
+               alt="Ilustração de uma turma da oficina: uma instrutora em pé aponta para um quadro com o desenho de uma janela de navegador, enquanto quatro alunos de idades diferentes usam computadores.">
+          <figcaption>
+            Turma da oficina &ldquo;Internet Segura&rdquo;, realizada no salão comunitário da Vila Esperança.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ---------- SECAO 2: OFICINAS ---------- -->
+    <section id="oficinas" aria-labelledby="titulo-oficinas">
+      <h2 id="titulo-oficinas">Oficinas oferecidas</h2>
+      <p>Todas as oficinas são gratuitas, presenciais e com material didático incluído.</p>
+
+      <div class="cartoes">
+        <!-- article: cada oficina e um conteudo independente, que faria sentido
+             se fosse lido isoladamente (ex.: em um resultado de busca). -->
+        <article class="cartao">
+          <h3>Informática básica</h3>
+          <p>Primeiros passos no computador: teclado, mouse, arquivos, pastas e digitação de textos.</p>
+          <ul>
+            <li>Carga horária: 20 horas</li>
+            <li>Turmas: terças e quintas, das 14h às 16h</li>
+            <li>Vagas por turma: 15</li>
+          </ul>
+        </article>
+
+        <article class="cartao">
+          <h3>Internet segura</h3>
+          <p>Como reconhecer golpes, criar senhas fortes, usar aplicativos de banco e proteger seus dados.</p>
+          <ul>
+            <li>Carga horária: 12 horas</li>
+            <li>Turmas: sábados, das 9h às 12h</li>
+            <li>Vagas por turma: 20</li>
+          </ul>
+        </article>
+
+        <article class="cartao">
+          <h3>Currículo e trabalho digital</h3>
+          <p>Montagem de currículo, criação de e-mail profissional e cadastro em plataformas de vagas.</p>
+          <ul>
+            <li>Carga horária: 16 horas</li>
+            <li>Turmas: segundas e quartas, das 19h às 21h</li>
+            <li>Vagas por turma: 15</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ---------- SECAO 3: DEPOIMENTOS ---------- -->
+    <section id="depoimentos" aria-labelledby="titulo-depoimentos">
+      <h2 id="titulo-depoimentos">Depoimentos dos alunos</h2>
+
+      <blockquote class="depoimento">
+        <p>&ldquo;Eu tinha medo de usar o aplicativo do banco. Hoje pago minhas contas sozinha, sem depender de ninguém.&rdquo;</p>
+        <footer>&mdash; Dona Marlene, 71 anos, turma de Internet Segura</footer>
+      </blockquote>
+
+      <blockquote class="depoimento">
+        <p>&ldquo;Fiz meu primeiro currículo na oficina e três semanas depois fui chamado para a entrevista que me deu o emprego.&rdquo;</p>
+        <footer>&mdash; Rafael, 18 anos, turma de Currículo e Trabalho Digital</footer>
+      </blockquote>
+
+      <!-- aside: conteudo complementar, relacionado mas nao essencial ao fluxo principal. -->
+      <aside class="aviso" aria-labelledby="titulo-voluntario">
+        <h3 id="titulo-voluntario">Quer ser voluntário?</h3>
+        <p>
+          Precisamos de instrutores, monitores e pessoas para apoio administrativo.
+          Não é necessário ter experiência com ensino: oferecemos treinamento.
+        </p>
+        <p>
+          <a class="link-texto" href="mailto:voluntarios@conectabairro.org.br">
+            Enviar e-mail para a equipe de voluntariado do Conecta Bairro
+          </a>
+        </p>
+      </aside>
+    </section>
+
+    <!-- ---------- SECAO 4: INSCRICAO (FORMULARIO) ---------- -->
+    <section id="inscricao" aria-labelledby="titulo-inscricao">
+      <h2 id="titulo-inscricao">Formulário de inscrição</h2>
+      <p id="ajuda-formulario">
+        Preencha os dados abaixo para reservar sua vaga. Os campos marcados com
+        asterisco (<span class="obrigatorio">*</span>) são obrigatórios.
+      </p>
+
+      <form class="formulario" action="#inscricao" method="post" aria-describedby="ajuda-formulario">
+
+        <!-- fieldset + legend: agrupa campos de um mesmo assunto e da um titulo
+             ao grupo, que o leitor de tela repete a cada campo do grupo. -->
+        <fieldset>
+          <legend>Dados pessoais</legend>
+
+          <div class="campo">
+            <label for="nome">Nome completo <span class="obrigatorio">*</span></label>
+            <input type="text" id="nome" name="nome" autocomplete="name" required
+                   aria-describedby="dica-nome">
+            <p class="dica" id="dica-nome">Digite o nome como aparece no seu documento de identidade.</p>
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail <span class="obrigatorio">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required
+                   aria-describedby="dica-email">
+            <p class="dica" id="dica-email">Usaremos apenas para confirmar sua matrícula. Exemplo: maria@email.com</p>
+          </div>
+
+          <div class="campo">
+            <label for="telefone">Telefone com DDD</label>
+            <input type="tel" id="telefone" name="telefone" autocomplete="tel"
+                   placeholder="(11) 90000-0000" aria-describedby="dica-telefone">
+            <p class="dica" id="dica-telefone">Campo opcional. Ligamos apenas em caso de mudança de horário.</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Escolha da oficina</legend>
+
+          <div class="campo">
+            <label for="oficina">Oficina desejada <span class="obrigatorio">*</span></label>
+            <select id="oficina" name="oficina" required>
+              <option value="">Selecione uma oficina</option>
+              <option value="basica">Informática básica</option>
+              <option value="internet">Internet segura</option>
+              <option value="curriculo">Currículo e trabalho digital</option>
+            </select>
+          </div>
+
+          <!-- Grupo de radios dentro do proprio fieldset: o legend funciona
+               como a "pergunta" do grupo para a tecnologia assistiva. -->
+          <fieldset class="grupo-opcoes">
+            <legend>Turno de preferência</legend>
+            <div class="opcao">
+              <input type="radio" id="turno-manha" name="turno" value="manha" checked>
+              <label for="turno-manha">Manhã</label>
+            </div>
+            <div class="opcao">
+              <input type="radio" id="turno-tarde" name="turno" value="tarde">
+              <label for="turno-tarde">Tarde</label>
+            </div>
+            <div class="opcao">
+              <input type="radio" id="turno-noite" name="turno" value="noite">
+              <label for="turno-noite">Noite</label>
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <fieldset>
+          <legend>Recursos de acessibilidade necessários</legend>
+          <div class="opcao">
+            <input type="checkbox" id="rec-libras" name="recursos" value="libras">
+            <label for="rec-libras">Intérprete de Libras</label>
+          </div>
+          <div class="opcao">
+            <input type="checkbox" id="rec-material" name="recursos" value="material-ampliado">
+            <label for="rec-material">Material impresso em fonte ampliada</label>
+          </div>
+          <div class="opcao">
+            <input type="checkbox" id="rec-acesso" name="recursos" value="acesso-cadeirante">
+            <label for="rec-acesso">Sala com acesso para cadeira de rodas</label>
+          </div>
+
+          <div class="campo">
+            <label for="observacoes">Outras observações</label>
+            <textarea id="observacoes" name="observacoes" rows="4"
+                      aria-describedby="dica-obs"></textarea>
+            <p class="dica" id="dica-obs">Conte se você precisa de algum outro apoio para participar.</p>
+          </div>
+        </fieldset>
+
+        <!-- Botoes com texto que descreve a acao, e nao rotulos genericos
+             como "Enviar" ou "OK". -->
+        <div class="acoes">
+          <button type="submit" class="botao botao--primario">Enviar inscrição na oficina</button>
+          <button type="reset" class="botao botao--secundario">Limpar todos os campos do formulário</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- ============ RODAPE ============ -->
+  <footer class="rodape">
+    <div class="rodape__colunas">
+      <section aria-labelledby="titulo-contato">
+        <h2 id="titulo-contato">Contato</h2>
+        <ul class="lista-simples">
+          <li>Rua das Acácias, 120 &mdash; Vila Esperança, São Paulo/SP</li>
+          <li>Telefone: <a href="tel:+551140028922">(11) 4002-8922</a></li>
+          <li>E-mail: <a href="mailto:contato@conectabairro.org.br">contato@conectabairro.org.br</a></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="titulo-horario">
+        <h2 id="titulo-horario">Horário de atendimento</h2>
+        <ul class="lista-simples">
+          <li>Segunda a sexta, das 9h às 21h</li>
+          <li>Sábados, das 9h às 13h</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="titulo-links">
+        <h2 id="titulo-links">Links úteis</h2>
+        <ul class="lista-simples">
+          <li><a href="#inscricao">Ir para o formulário de inscrição</a></li>
+          <li><a href="#oficinas">Consultar a lista de oficinas</a></li>
+          <li>
+            <a href="https://www.w3.org/WAI/WCAG22/quickref/" hreflang="en" rel="external">
+              Consultar as recomendações WCAG 2.2 no site do W3C (em inglês)
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="rodape__creditos">
+      Conecta Bairro &mdash; projeto social fictício criado para a atividade prática de
+      Acessibilidade Web e HTML Semântico.
+    </p>
+  </footer>
+
+</body>
+</html>

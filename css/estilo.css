@@ -1,0 +1,486 @@
+/* ============================================================
+   Conecta Bairro - folha de estilos
+   Organizacao:
+   1. Variaveis de cor (paleta com contraste verificado)
+   2. Reset e base
+   3. Acessibilidade (link de salto e foco visivel)
+   4. Cabecalho e menu
+   5. Conteudo e secoes
+   6. Formulario
+   7. Rodape
+   8. Responsividade e preferencias do usuario
+   ============================================================ */
+
+/* ---------- 1. VARIAVEIS DE COR ----------
+   Cada cor foi conferida na relacao de contraste exigida pela WCAG 2.2
+   (minimo 4.5:1 para texto normal e 3:1 para bordas e componentes). */
+:root {
+  --tinta:          #14181f;   /* texto sobre branco  -> 17.8:1 */
+  --tinta-suave:    #454d59;   /* textos de apoio     ->  8.5:1 */
+  --marca:          #0b4f6c;   /* azul do projeto     ->  8.9:1 */
+  --marca-escura:   #072f41;   /* fundos escuros      -> 14.1:1 com branco */
+  --marca-clara:    #e6f0f4;   /* fundo de destaque */
+  --destaque:       #9c3412;   /* foco e obrigatorio  ->  7.2:1 */
+  --fundo:          #ffffff;
+  --fundo-alt:      #f3f6f8;
+  --borda:          #b6c0c9;
+  --foco-claro:     #ffd166;   /* anel de foco sobre fundo escuro */
+
+  --raio: 8px;
+  --largura-max: 1080px;
+}
+
+/* ---------- 2. RESET E BASE ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* Fonte sem serifa e corpo de 18px: melhora a legibilidade para
+     pessoas com baixa visao e dislexia. */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--tinta);
+  background-color: var(--fundo);
+}
+
+h1, h2, h3 {
+  line-height: 1.25;
+  color: var(--marca-escura);
+}
+
+h1 { font-size: 2rem;    margin: 0; }
+h2 { font-size: 1.6rem;  margin-top: 0; }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0 0 1rem; }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Sublinhado sempre presente nos links: a cor sozinha nao pode ser
+   o unico meio de identificar um link (WCAG 1.4.1 - Uso de cor). */
+a {
+  color: var(--marca);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--destaque);
+}
+
+/* ---------- 3. ACESSIBILIDADE ---------- */
+
+/* Link de salto: fica fora da tela ate receber foco pelo teclado. */
+.link-salto {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background-color: var(--destaque);
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 var(--raio) 0;
+}
+
+.link-salto:focus {
+  left: 0;  /* aparece no canto superior esquerdo ao ser focado */
+  /* o anel padrao e laranja e ficaria sobre o proprio fundo laranja
+     do link, entao aqui ele passa a ser branco */
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Destaque visual do elemento em foco.
+   Regra global: qualquer elemento focavel recebe um anel espesso,
+   com cor de alto contraste e afastamento para nao encostar no texto. */
+:focus {
+  outline: 3px solid var(--destaque);
+  outline-offset: 3px;
+}
+
+/* :focus-visible mostra o anel para quem usa teclado sem poluir
+   a tela de quem usa mouse; :focus acima garante o funcionamento
+   em navegadores antigos. */
+:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Sobre fundos escuros o anel laranja perderia contraste,
+   entao usamos o amarelo claro. */
+.cabecalho :focus,
+.cabecalho :focus-visible,
+.rodape :focus,
+.rodape :focus-visible {
+  outline-color: var(--foco-claro);
+}
+
+/* ---------- 4. CABECALHO E MENU ---------- */
+.cabecalho {
+  background-color: var(--marca-escura);
+  color: #ffffff;
+  padding: 1.5rem clamp(1rem, 4vw, 3rem);
+}
+
+.cabecalho h1 {
+  color: #ffffff;
+}
+
+.cabecalho__marca {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: var(--largura-max);
+  margin: 0 auto;
+}
+
+.cabecalho__slogan {
+  margin: 0.25rem 0 0;
+  color: #d7e4ea;   /* 10.8:1 sobre o fundo escuro */
+}
+
+.menu {
+  max-width: var(--largura-max);
+  margin: 1.25rem auto 0;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  display: inline-block;
+  color: #ffffff;
+  padding: 0.5rem 0.25rem;   /* area de clique maior que 24px (WCAG 2.5.8) */
+  font-weight: 600;
+}
+
+.menu a:hover {
+  color: var(--foco-claro);
+}
+
+/* ---------- 5. CONTEUDO E SECOES ---------- */
+.conteudo {
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding: 2rem clamp(1rem, 4vw, 3rem) 3rem;
+}
+
+.conteudo > section {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.conteudo > section:last-child {
+  border-bottom: none;
+}
+
+.sobre__grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.figura {
+  margin: 0;
+  background-color: var(--marca-clara);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1rem;
+}
+
+.figura img {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.figura figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--tinta-suave);
+}
+
+.lista-numeros {
+  padding-left: 1.25rem;
+}
+
+.lista-numeros strong {
+  color: var(--marca);
+}
+
+/* Cartoes das oficinas */
+.cartoes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.cartao {
+  background-color: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-left: 6px solid var(--marca);
+  border-radius: var(--raio);
+  padding: 1.25rem;
+}
+
+.cartao h3 {
+  margin-top: 0;
+}
+
+.cartao ul {
+  padding-left: 1.25rem;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+/* Depoimentos */
+.depoimento {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.25rem;
+  background-color: var(--marca-clara);
+  border-left: 6px solid var(--marca);
+  border-radius: 0 var(--raio) var(--raio) 0;
+}
+
+.depoimento p {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+
+.depoimento footer {
+  font-size: 0.95rem;
+  color: var(--tinta-suave);
+}
+
+/* Bloco complementar (aside) */
+.aviso {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 2px dashed var(--marca);
+  border-radius: var(--raio);
+  background-color: var(--fundo-alt);
+}
+
+.aviso h3 {
+  margin-top: 0;
+}
+
+/* ---------- 6. FORMULARIO ---------- */
+.formulario {
+  max-width: 640px;
+}
+
+fieldset {
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1rem 1.25rem 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+legend {
+  font-weight: 700;
+  color: var(--marca-escura);
+  padding: 0 0.5rem;
+}
+
+.grupo-opcoes {
+  margin-top: 1rem;
+  background-color: var(--fundo-alt);
+}
+
+.campo {
+  margin-bottom: 1.25rem;
+}
+
+/* Rotulo em bloco, acima do campo: reduz o risco de o texto ser
+   cortado em zoom de 200% e facilita a leitura em telas pequenas. */
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.65rem 0.75rem;
+  color: var(--tinta);
+  background-color: var(--fundo);
+  border: 2px solid #6b7681;   /* borda com 4.6:1 sobre o branco */
+  border-radius: var(--raio);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Texto de ajuda ligado ao campo por aria-describedby. */
+.dica {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
+}
+
+/* O asterisco tem cor E o texto explicativo no inicio do formulario,
+   para nao depender apenas da cor. */
+.obrigatorio {
+  color: var(--destaque);
+  font-weight: 700;
+}
+
+/* Opcoes de radio e checkbox: rotulo ao lado, alvo de clique amplo. */
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.opcao input {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--marca);
+  flex-shrink: 0;
+}
+
+.opcao label {
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+/* Botoes */
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.botao {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.8rem 1.4rem;
+  min-height: 48px;            /* alvo de toque confortavel */
+  border-radius: var(--raio);
+  cursor: pointer;
+}
+
+.botao--primario {
+  background-color: var(--marca);
+  color: #ffffff;              /* 8.9:1 */
+  border: 2px solid var(--marca);
+}
+
+.botao--primario:hover {
+  background-color: var(--marca-escura);
+  border-color: var(--marca-escura);
+}
+
+.botao--secundario {
+  background-color: #ffffff;
+  color: var(--marca);
+  border: 2px solid var(--marca);
+}
+
+.botao--secundario:hover {
+  background-color: var(--marca-clara);
+}
+
+/* ---------- 7. RODAPE ---------- */
+.rodape {
+  background-color: var(--marca-escura);
+  color: #eef4f7;
+  padding: 2.5rem clamp(1rem, 4vw, 3rem);
+}
+
+.rodape__colunas {
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.rodape h2 {
+  font-size: 1.15rem;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.rodape a {
+  color: #b9e2f5;              /* 10.2:1 sobre o fundo escuro */
+}
+
+.rodape a:hover {
+  color: var(--foco-claro);
+}
+
+.lista-simples {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista-simples li {
+  margin-bottom: 0.5rem;
+}
+
+.rodape__creditos {
+  max-width: var(--largura-max);
+  margin: 2rem auto 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid #3d5c6b;
+  font-size: 0.9rem;
+  color: #d7e4ea;
+}
+
+/* ---------- 8. RESPONSIVIDADE E PREFERENCIAS ---------- */
+@media (max-width: 860px) {
+  .sobre__grade,
+  .cartoes,
+  .rodape__colunas {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 17px; }
+  .acoes .botao { width: 100%; }
+}
+
+/* Respeita quem pediu menos animacao no sistema operacional. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Modo de alto contraste do Windows: mantem o anel de foco visivel. */
+@media (forced-colors: active) {
+  :focus,
+  :focus-visible {
+    outline: 3px solid Highlight;
+  }
+}
